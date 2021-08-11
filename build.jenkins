@@ -1,5 +1,4 @@
 node('zavijava') {
-    # algorab
     withEnv([
         "JOB_NAME=TimberRiskRating",
         "TEMP=$WORKSPACE\\tmp",
