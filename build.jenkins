@@ -8,11 +8,13 @@ node('zavijava') {
         ]) {
         stage('checkout') {
             //sh 'if [ ! -d "$TEMP" ]; then mkdir $TEMP; fi'
-            checkout([$class: 'GitSCM', branches: [[name: "${env.TAGNAME}"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
+            checkout([$class: 'GitSCM', branches: [[name: "helloworld"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
         }
         stage('demo') {
             bat '''
                 echo running a test / demo
+                IF NOT EXISTS venv
+                python -m virtualenv venv
             '''
         }
     }
