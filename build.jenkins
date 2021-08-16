@@ -13,7 +13,7 @@ node('zavijava') {
             bat '''
                 echo setting up virtual environment
 
-                IF NOT EXISTS "%VENV_PATH%" (
+                IF NOT EXIST "%VENV_PATH%" (
                     echo done
                 )
             '''
