@@ -13,11 +13,15 @@ node('zavijava') {
             bat '''
                 echo setting up virtual environment
 
-                IF NOT EXIST "%VENV_PATH%" (
-                    pip install virtualenv
-                    python -m virtualenv .venv
-                    pip install -r requirements.txt
+                IF NOT EXIST %VENV_PATH% (
+                    mkdir %VENV_PATH%
                 )
+
+                IF NOT EXIST %VENV_PATH%\\python.exe (
+                    pip install virtualenv
+                    python -m virtualenv %VENV_PATH%
+                )
+
             '''
         }
     }
