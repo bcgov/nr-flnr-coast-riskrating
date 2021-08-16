@@ -12,9 +12,10 @@ node('zavijava') {
         stage('setup venv') {
             bat '''
                 echo setting up virtual environment
-                IF NOT EXISTS .venv
-                python -m virtualenv .venv
-                pip install -r requirements.txt
+                IF NOT EXISTS .venv (
+                    python -m virtualenv .venv
+                    pip install -r requirements.txt
+                )
             '''
         }
     }
