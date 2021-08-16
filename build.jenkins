@@ -14,6 +14,7 @@ node('zavijava') {
                 echo setting up virtual environment
 
                 IF NOT EXIST "%VENV_PATH%" (
+                    pip install virtualenv
                     python -m virtualenv .venv
                     pip install -r requirements.txt
                 )
