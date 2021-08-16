@@ -12,7 +12,7 @@ node('zavijava') {
         stage('demo') {
             bat '''
                 echo running a test / demo
-                IF NOT EXISTS venv
+                echo this is an env var %TEST_ENV%
                 python -m virtualenv venv
             '''
         }
