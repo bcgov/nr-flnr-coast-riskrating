@@ -260,7 +260,7 @@ APPRAISAL_DATA_SUBMISSION.ECAS_ID DESC
 # In[4]:
 
 
-rootPath = constants.ROOT_PATH
+rootPath = constants.DATA_PATH
 filePath = os.path.join(rootPath, 'received.csv')
 new_received = pd.DataFrame(query)
 new_received.to_csv(filePath, mode='a', index=False, header=False)
