@@ -14,8 +14,8 @@ node('zavijava') {
                 echo setting up virtual environment
 
                 @echo off
-
                 net use Z: %SERVER_PATH% /user:%IDIR_USERNAME% %IDIR_PW%
+                @echo on
 
                 IF NOT EXIST %ROOT_PATH% (
                     mkdir %ROOT_PATH%
@@ -28,7 +28,7 @@ node('zavijava') {
                     pip install -r requirements.txt
                 )
 
-                @echo on
+                
 
             '''
         }
