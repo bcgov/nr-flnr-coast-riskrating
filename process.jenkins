@@ -5,13 +5,23 @@ node('zavijava') {
     stage('build') {
         build job: "RiskRating_Build",
         parameters: [
-            string(name: 'VENV_PATH', value: "${VENV_PATH}")
+            string(name: 'no_proxy', value: "${no_proxy}"),
+            string(name: 'RR_DRIVE_MAPPING', value: "${RR_DRIVE_MAPPING}"),
+            string(name: 'SERVER_PATH', value: "${SERVER_PATH}"),
+            string(name: 'ROOT_PATH', value: "${ROOT_PATH}"),
+            string(name: 'VENV_PATH', value: "${VENV_PATH}"),
+            string(name: 'IDIR_USERNAME', value: "${IDIR_USERNAME}"),
+            string(name: 'IDIR_PW', value: "${IDIR_PW}")
         ]
     }
-    stage('configure drive mappings') {
+    stage('activate venv') {
         bat '''
         
-        echo "%VENV_PATH%"
+            call "%VENV_PATH%"\\Scripts\\activate.bat
+
+            ls
+
+            call "%VENV_PATH%"\\Scripts\\deactivate.bat
 
         '''
     }
