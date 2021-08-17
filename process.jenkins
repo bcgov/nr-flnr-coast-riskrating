@@ -1,0 +1,8 @@
+node('zavijava') {
+    stage('checkout') {
+        checkout([$class: 'GitSCM', branches: [[name: "dev"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
+    }
+    stage('build') {
+        build job: "RiskRating_Build"
+    }
+}

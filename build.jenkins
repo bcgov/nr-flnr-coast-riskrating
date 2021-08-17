@@ -1,6 +1,6 @@
 node('zavijava') {
     withEnv([
-        "JOB_NAME=TimberRiskRating", 
+        "JOB_NAME=RiskRating_Build", 
         "TEMP=$WORKSPACE\\tmp",
         "TMP=$WORKSPACE\\tmp",
         "no_proxy=github.com"
@@ -47,6 +47,7 @@ node('zavijava') {
 
                 call "%VENV_PATH%"\\Scripts\\activate.bat
                 pip install -r requirements.txt
+                call '%VENV_PATH%'\\Scripts\\deactivate.bat
 
             '''
         }
