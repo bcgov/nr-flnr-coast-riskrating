@@ -13,8 +13,12 @@ node('zavijava') {
             bat '''
                 echo setting up virtual environment
 
-                IF NOT EXIST %VENV_PATH% (
-                    mkdir %VENV_PATH%
+                @echo off
+
+                net use Z: %SERVER_PATH% /user:%IDIR_USERNAME% %IDIR_PW%
+
+                IF NOT EXIST %ROOT_PATH% (
+                    mkdir %ROOT_PATH%
                 )
 
                 IF NOT EXIST %VENV_PATH%\\python.exe (
@@ -23,6 +27,8 @@ node('zavijava') {
                     call %VENV_PATH%\\Scripts\\activate.bat
                     pip install -r requirements.txt
                 )
+
+                @echo on
 
             '''
         }
