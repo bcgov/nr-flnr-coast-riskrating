@@ -13,9 +13,11 @@ node('zavijava') {
             bat '''
                 echo setting up virtual environment
 
-                @echo off
-                net use Z: %SERVER_PATH% /user:%IDIR_USERNAME% %IDIR_PW%
-                @echo on
+                IF NOT EXIST %RR_DRIVE_MAPPING%:\\nul (
+                    @echo off
+                    net use %RR_DRIVE_MAPPING%: %SERVER_PATH% /user:%IDIR_USERNAME% %IDIR_PW%
+                    @echo on
+                )
 
                 net use
 
