@@ -3,6 +3,16 @@ node('zavijava') {
         checkout([$class: 'GitSCM', branches: [[name: "dev"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
     }
     stage('build') {
-        build job: "RiskRating_Build"
+        build job: "RiskRating_Build",
+        parameters: [
+            string(name: 'VENV_PATH', value: "${VENV_PATH}")
+        ]
+    }
+    stage('configure drive mappings') {
+        bat '''
+        
+        echo "%VENV_PATH%"
+
+        '''
     }
 }
