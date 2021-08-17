@@ -9,17 +9,17 @@ node('zavijava') {
             //sh 'if [ ! -d "$TEMP" ]; then mkdir $TEMP; fi'
             checkout([$class: 'GitSCM', branches: [[name: "dev"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
         }
-        stage('setup venv') {
+        stage('configure drive mappings') {
             bat '''
-                echo setting up virtual environment
 
+                :: Create Drive Mappings and required folders
+                echo mapping drives
+                
                 @echo off
                 IF NOT EXIST %RR_DRIVE_MAPPING%:\\nul (
-                    net use %RR_DRIVE_MAPPING%: %SERVER_PATH% /user:%IDIR_USERNAME% %IDIR_PW%
+                    net use %RR_DRIVE_MAPPING%: %SERVER_PATH% /user:%IDIR_USERNAME% %IDIR_PW% /PERSISTENT:NO
                 )
                 @echo on
-
-                net use
 
                 IF NOT EXIST "%ROOT_PATH%" (
                     mkdir "%ROOT_PATH%"
@@ -29,14 +29,24 @@ node('zavijava') {
                     mkdir "%VENV_PATH%"
                 )
 
+                :: print network mappings
+                net use
+
+            '''
+        }
+        stage('setup venv') {
+            bat '''
+
+                :: create virtual environment and install dependencies
+                echo setting up virtual environment
+
                 IF NOT EXIST "%VENV_PATH%"\\Scripts\\python.exe (
                     pip install virtualenv
                     python -m virtualenv "%VENV_PATH%"
-                    call "%VENV_PATH%"\\Scripts\\activate.bat
-                    pip install -r requirements.txt
                 )
 
-                
+                call "%VENV_PATH%"\\Scripts\\activate.bat
+                pip install -r requirements.txt
 
             '''
         }
