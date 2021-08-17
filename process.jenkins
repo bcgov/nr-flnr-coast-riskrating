@@ -19,7 +19,7 @@ node('zavijava') {
         
             call "%VENV_PATH%"\\Scripts\\activate.bat
 
-            ls
+            dir
 
             call "%VENV_PATH%"\\Scripts\\deactivate.bat
 
