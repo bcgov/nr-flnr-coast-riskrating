@@ -1,10 +1,11 @@
 node('zavijava') {
     stage('checkout') {
-        checkout([$class: 'GitSCM', branches: [[name: "dev"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
+        checkout([$class: 'GitSCM', branches: [[name: '$TAGNAME']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
     }
     stage('build') {
         build job: "RiskRating_Build",
         parameters: [
+            string(name: 'TAGNAME', value: "${TAGNAME}"),
             string(name: 'no_proxy', value: "${no_proxy}"),
             string(name: 'RR_DRIVE_MAPPING', value: "${RR_DRIVE_MAPPING}"),
             string(name: 'SERVER_PATH', value: "${SERVER_PATH}"),

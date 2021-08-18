@@ -7,7 +7,7 @@ node('zavijava') {
         ]) {
         stage('checkout') {
             //sh 'if [ ! -d "$TEMP" ]; then mkdir $TEMP; fi'
-            checkout([$class: 'GitSCM', branches: [[name: "dev"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
+            checkout([$class: 'GitSCM', branches: [[name: "${env.TAGNAME}"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
         }
         stage('configure drive mappings') {
             bat '''
