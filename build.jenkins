@@ -42,7 +42,7 @@ node('zavijava') {
 
                 IF NOT EXIST "%VENV_PATH%"\\Scripts\\python.exe (
                     ::python -m pip install virtualenv
-                    python -m venv "%VENV_PATH%"
+                    python -m virtualenv "%VENV_PATH%"
                 )
 
                 call "%VENV_PATH%"\\Scripts\\activate.bat
