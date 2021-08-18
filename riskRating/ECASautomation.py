@@ -16,7 +16,6 @@ import cx_Oracle
 
 # setup ODBC connection
 
-driver_name = constants.ORACLE_DRIVER_NAME
 tns_name = constants.ORACLE_TNS_NAME
 username = constants.ORACLE_USERNAME
 password = constants.ORACLE_PASSWORD
