@@ -41,12 +41,12 @@ node('zavijava') {
                 echo setting up virtual environment
 
                 IF NOT EXIST "%VENV_PATH%"\\Scripts\\python.exe (
-                    ::python3 -m pip install virtualenv
-                    python3 -m venv "%VENV_PATH%"
+                    ::python -m pip install virtualenv
+                    python -m venv "%VENV_PATH%"
                 )
 
                 call "%VENV_PATH%"\\Scripts\\activate.bat
-                python3 -m pip install -r requirements.txt
+                python -m pip install -r requirements.txt
                 call "%VENV_PATH%"\\Scripts\\deactivate.bat
 
             '''
