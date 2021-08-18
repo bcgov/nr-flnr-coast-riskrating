@@ -6,9 +6,9 @@
 
 import os, os.path
 import win32com.client as win32
-import pyodbc
 import pandas as pd
 import constants
+import cx_Oracle
 
 
 # In[2]:
@@ -16,11 +16,10 @@ import constants
 
 # setup ODBC connection
 
-driver_name = constants.ORACLE_DRIVER_NAME
 tns_name = constants.ORACLE_TNS_NAME
 username = constants.ORACLE_USERNAME
 password = constants.ORACLE_PASSWORD
-connection = pyodbc.connect('DRIVER=' + driver_name + ';DBQ=' + tns_name + ';UID=' + username + ';PWD=' + password)
+connection = cx_Oracle.connect(user=username, password=password, dsn=tns_name, encoding="UTF-8")
 cursor = connection.cursor()
 
 
@@ -260,7 +259,7 @@ APPRAISAL_DATA_SUBMISSION.ECAS_ID DESC
 # In[4]:
 
 
-rootPath = constants.ROOT_PATH
+rootPath = constants.DATA_PATH
 filePath = os.path.join(rootPath, 'received.csv')
 new_received = pd.DataFrame(query)
 new_received.to_csv(filePath, mode='a', index=False, header=False)
@@ -546,6 +545,7 @@ query = pd.read_sql_query('''
 
 SELECT
 ADS.ECAS_ID,
+ASTM.TIMBER_MARK,
 APPRAISAL_STATUS_CODE,
 ORG_UNIT_CODE,
 DATA_OFFICE_CHECKED_IND,
@@ -553,8 +553,9 @@ DATA_FIELD_CHECKED_IND,
 TOA_ELIGIBLE_IND
 FROM 
 APPRAISAL_DATA_SUBMISSION ADS
-INNER JOIN APPRAISAL_DATA_SUBMISSION_CTRL ADSC ON ADS.ECAS_ID = ADSC.ECAS_ID
-INNER JOIN ORG_UNIT ON ORG_UNIT.ORG_UNIT_NO = ADS.ADMIN_DISTRICT
+LEFT JOIN APPRAISAL_DATA_SUBMISSION_CTRL ADSC ON ADS.ECAS_ID = ADSC.ECAS_ID
+LEFT JOIN ORG_UNIT ON ORG_UNIT.ORG_UNIT_NO = ADS.ADMIN_DISTRICT
+LEFT JOIN ADS_SUBMITTED_TIMBER_MARK ASTM ON ASTM.ECAS_ID = ADS.ECAS_ID
 WHERE
 APPRAISAL_METHOD_CODE = 'C'
 AND APPRAISAL_CATEGORY_CODE = 'P'

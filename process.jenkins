@@ -1,0 +1,33 @@
+node('zavijava') {
+    stage('checkout') {
+        checkout([$class: 'GitSCM', branches: [[name: '$TAGNAME']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bcgov/nr-flnr-coast-riskrating']]])
+    }
+    stage('build') {
+        build job: "RiskRating_Build",
+        parameters: [
+            string(name: 'TAGNAME', value: "${TAGNAME}"),
+            string(name: 'no_proxy', value: "${no_proxy}"),
+            string(name: 'RR_DRIVE_MAPPING', value: "${RR_DRIVE_MAPPING}"),
+            string(name: 'SERVER_PATH', value: "${SERVER_PATH}"),
+            string(name: 'ROOT_PATH', value: "${ROOT_PATH}"),
+            string(name: 'VENV_PATH', value: "${VENV_PATH}"),
+            string(name: 'IDIR_USERNAME', value: "${IDIR_USERNAME}"),
+            string(name: 'IDIR_PW', value: "${IDIR_PW}")
+        ]
+    }
+    stage('activate venv') {
+        bat '''
+        
+            call "%VENV_PATH%"\\Scripts\\activate.bat
+
+            echo calling python script
+
+            python riskRating/ECASautomation.py
+
+            echo new data saved in %DATA_PATH%
+
+            call "%VENV_PATH%"\\Scripts\\deactivate.bat
+
+        '''
+    }
+}
