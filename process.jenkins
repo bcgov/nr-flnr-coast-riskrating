@@ -19,7 +19,9 @@ node('zavijava') {
         
             call "%VENV_PATH%"\\Scripts\\activate.bat
 
-            :: python riskRating/ECASautomation.py
+            echo calling python script
+
+            python riskRating/ECASautomation.py
 
             call "%VENV_PATH%"\\Scripts\\deactivate.bat
 

@@ -6,9 +6,9 @@
 
 import os, os.path
 import win32com.client as win32
-import pyodbc
 import pandas as pd
 import constants
+import cx_Oracle
 
 
 # In[2]:
@@ -20,7 +20,7 @@ driver_name = constants.ORACLE_DRIVER_NAME
 tns_name = constants.ORACLE_TNS_NAME
 username = constants.ORACLE_USERNAME
 password = constants.ORACLE_PASSWORD
-connection = pyodbc.connect('DRIVER=' + driver_name + ';DBQ=' + tns_name + ';UID=' + username + ';PWD=' + password)
+connection = cx_Oracle.connect(user=username, password=password, dsn=tns_name, encoding="UTF-8")
 cursor = connection.cursor()
 
 
