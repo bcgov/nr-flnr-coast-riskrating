@@ -46,7 +46,7 @@ node('zavijava') {
                 )
 
                 call "%VENV_PATH%"\\Scripts\\activate.bat
-                python3 -mpip install -r requirements.txt
+                python3 -m pip install -r requirements.txt
                 call "%VENV_PATH%"\\Scripts\\deactivate.bat
 
             '''
