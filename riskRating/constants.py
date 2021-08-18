@@ -9,5 +9,4 @@ if os.path.exists(envPath):
 ORACLE_USERNAME = os.environ['ORACLE_USERNAME']
 ORACLE_PASSWORD = os.environ['ORACLE_PASSWORD']
 ORACLE_TNS_NAME = os.environ['ORACLE_TNS_NAME']
-ORACLE_DRIVER_NAME = os.environ['ORACLE_DRIVER_NAME']
 DATA_PATH = os.environ['DATA_PATH']

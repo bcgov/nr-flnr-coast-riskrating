@@ -23,6 +23,8 @@ node('zavijava') {
 
             python riskRating/ECASautomation.py
 
+            echo new data saved in %DATA_PATH%
+
             call "%VENV_PATH%"\\Scripts\\deactivate.bat
 
         '''
