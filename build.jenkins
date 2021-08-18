@@ -41,7 +41,7 @@ node('zavijava') {
                 echo setting up virtual environment
 
                 IF NOT EXIST "%VENV_PATH%"\\Scripts\\python.exe (
-                    :: pip3 install virtualenv
+                    python3 -m pip install virtualenv
                     python3 -m virtualenv "%VENV_PATH%"
                 )
 
