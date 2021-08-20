@@ -12,7 +12,7 @@ node('zavijava') {
             string(name: 'ROOT_PATH', value: "${ROOT_PATH}"),
             string(name: 'VENV_PATH', value: "${VENV_PATH}"),
             string(name: 'IDIR_USERNAME', value: "${IDIR_USERNAME}"),
-            string(name: 'IDIR_PW', value: "${IDIR_PW}")
+            string(name: 'IDIR_PW', value: '$IDIR_PW')
         ]
     }
     stage('activate venv') {
