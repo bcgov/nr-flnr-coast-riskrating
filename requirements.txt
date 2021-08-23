@@ -1,0 +1,4 @@
+pandas==0.24.2
+pypiwin32==223
+python-dotenv==0.18.0
+cx_Oracle==7.3
